@@ -46,7 +46,7 @@ class ProductsController extends Controller
             $request->file('image_name')->storeAs('products',$product['image_name']);
         }
         Product::create($product);
-        
+
         return response()->json([
             'saved' => true,
             'product' => $product
@@ -109,7 +109,8 @@ class ProductsController extends Controller
     {
         Auth::logout();
         $products = Product::all();
+        $categories = Category::all();
 
-        return view('product', compact('products'));
+        return view('product', compact('products', 'categories'));
     }
 }
