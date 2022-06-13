@@ -78,6 +78,7 @@
                                         <a data-scroll-nav="0" href="{{route('index')}}">Home</a>
                                     </li>
 
+                                    @auth()
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Config
@@ -88,7 +89,10 @@
                                         </div>
                                     </li>
 
-                                    
+                                    @endauth
+
+
+
                                     @if (Route::has('login'))
                                             @auth
                                                 <cart-component></cart-component>
