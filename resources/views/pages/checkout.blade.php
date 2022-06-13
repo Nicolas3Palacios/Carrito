@@ -379,5 +379,9 @@ hr{
 @endsection
 
 @section('content')
+
+    @auth()
     <checkout></checkout>
+
+    @endauth
 @endsection
