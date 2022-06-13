@@ -12,11 +12,6 @@
     <!--====== Title ======-->
     <title>Best Shoping</title>
 
-    <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-
-    <!--====== Favicon Icon ======-->
-    {{-- <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png"> --}}
 
     <!--====== Bootstrap css ======-->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -75,11 +70,7 @@
                             <a class="navbar-brand" href="{{('/')}}">
                                 <img src="assets/images/logos.png" width="270" alt="Logo">
                             </a> <!-- Logo -->
-                            {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="bar-icon"></span>
-                                <span class="bar-icon"></span>
-                                <span class="bar-icon"></span>
-                            </button> --}}
+
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ml-auto">
@@ -97,12 +88,7 @@
                                         </div>
                                     </li>
 
-                                    {{-- <li class="nav-item">
-                                        <a data-scroll-nav="0" href="{{route('items-view')}}">Products</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a data-scroll-nav="0" href="{{route('category-view')}}">Categories</a>
-                                    </li> --}}
+                                    
                                     @if (Route::has('login'))
                                             @auth
                                                 <cart-component></cart-component>

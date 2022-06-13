@@ -15,7 +15,7 @@
                             @endforeach
                         @endif
 
-                        
+
                     </div> <!-- nav -->
                 </div> <!-- collection menu -->
             </div>
@@ -25,40 +25,39 @@
                         @foreach ($categories as $category)
                         <div class="tab-pane fade show active" id="v-pills-{{$category->name}}" role="tabpanel" aria-labelledby="v-pills-{{$category->name}}-tab">
                             @if (isset($products))
-                            @foreach ($products as $product)
-                                <div class="product-items mt-30">
-                                    <div class="row product-items-active">
-                                                @if ($product->category_name == $category->name)
-                                                <div class="col-md-4">
-                                                    <div class="single-product-items">
-                                                        <div class="product-item-image">
-                                                            <a href="#"><img src="{{ asset('storage'.'/'.$product->image_name)}}" alt="Product"></a>
-                                                        </div>
-                                                        <div class="product-item-content text-center mt-30">
-                                                            <h5 class="product-title"><a href="#">{{$product->name}}</a></h5>
-                                                            <ul class="rating">
-                                                                <li><i class="lni-star-filled"></i></li>
-                                                                <li><i class="lni-star-filled"></i></li>
-                                                                <li><i class="lni-star-filled"></i></li>
-                                                                <li><i class="lni-star-filled"></i></li>
-                                                            </ul>
-                                                            <span class="regular-price">${{$product->sale_price}}</span>
-                                                            {{-- <span class="discount-price">${{$product->price }}</span> --}}
-                                                            <add-component product-id="{{$product->id}}"
-                                                                user-id="{{auth()->user()->id ?? 0}}"/>
-                                                        </div>
-                                                    </div> <!-- single product items -->
-                                                </div>                                                
-                                                @endif
-                                                
-                                            </div> <!-- row -->
-                                        </div> <!-- product items -->
-                                        @endforeach
-                                @endif
+                                @foreach ($products as $product)
+                                     @if ($product->category_name == $category->name)
+                                        <div class="product-items mt-30">
+                                            <div class="row product-items-active">
+                                                    <div class="col-md-4">
+                                                        <div class="single-product-items">
+                                                            <div class="product-item-image">
+                                                                    <a href="#"><img src="{{ asset('storage'.'/'.$product->image_name)}}" alt="Product"></a>
+                                                            </div>
+                                                            <div class="product-item-content text-center mt-30">
+                                                                <h5 class="product-title"><a href="#">{{$product->name}}</a></h5>
+                                                                <ul class="rating">
+                                                                    <li><i class="lni-star-filled"></i></li>
+                                                                    <li><i class="lni-star-filled"></i></li>
+                                                                    <li><i class="lni-star-filled"></i></li>
+                                                                    <li><i class="lni-star-filled"></i></li>
+                                                                </ul>
+                                                                <span class="regular-price">${{$product->sale_price}}</span>
+                                                                {{-- <span class="discount-price">${{$product->price }}</span> --}}
+                                                                <add-component product-id="{{$product->id}}"
+                                                                    user-id="{{auth()->user()->id ?? 0}}"/>
+                                                            </div>
+                                                        </div> <!-- single product items -->
+                                                    </div>
+                                                </div> <!-- row -->
+                                            </div> <!-- product items -->
+                                     @endif
+                                 @endforeach
+                             @endif
                         </div> <!-- tab pane -->
                         @endforeach
-                        
-                       
+
+
                 </div> <!-- tab content -->
             </div>
             @endif
