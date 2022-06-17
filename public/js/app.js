@@ -5591,6 +5591,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -29342,7 +29344,7 @@ var render = function () {
                     [
                       item.name
                         ? _c("div", { staticClass: "plan-data" }, [
-                            _c("label", [_vm._v(_vm._s(item.name))]),
+                            _c("h5", [_vm._v(_vm._s(item.name))]),
                             _vm._v(" "),
                             _c("p", { staticClass: "plan-text" }, [
                               _vm._v(

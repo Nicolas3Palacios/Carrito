@@ -11,10 +11,11 @@
                             <div class="plan-selection" v-for="item in items" :key="item.id">
                                 <div class="plan-data" v-if="item.name">
                                         <!-- <input id="question1" name="question" type="radio" class="with-font" value="sel" /> -->
-                                        <label >{{item.name}}</label>
+                                        <h5>{{item.name}}</h5>
                                         <p class="plan-text">
                                         Quantity: {{item.quantity}}</p>
                                         <span class="plan-price">Price: ${{item.sale_price}}</span>
+                                        
                                 </div>
                             </div>
                         </div>
@@ -38,6 +39,7 @@
                                     </div>
                                 </div>
                             </div>
+                      
                             <div class="summary-block">
                                 <div class="summary-content">
                                 <div class="summary-head"> <h5 class="summary-title">Total</h5></div>

@@ -40,6 +40,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+    
         $product = $request->all();
         $imageName = null;
 
@@ -47,7 +48,7 @@ class ProductsController extends Controller
             
             $imageName = "images/products/{$request->image_name->getClientOriginalName()}.{$request->image_name->getClientOriginalExtension()}";
             $request->image_name->move(public_path('images/products'),$imageName);
-
+          
         }
         
         Product::create($product);
@@ -56,6 +57,7 @@ class ProductsController extends Controller
             'saved' => true,
             'product' => $product
         ]);
+
     }
 
     /**

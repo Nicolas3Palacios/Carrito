@@ -29,7 +29,7 @@
                     </div>
                         <div class="form-group">
                             <label for="phone_number" class="form-label">Image</label>
-                            <input type="file"  class="form-control" v-on:change="select_file">
+                            <input type="file"  class="form-control" @change="select_file">
                         </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary mt-2">Save</button>
