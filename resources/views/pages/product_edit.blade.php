@@ -7,9 +7,11 @@
 <section class="container">
 
     <div class="card">
+
         <div class="card-body">
-            
-            <table-category :categories="{{$categories}}"> </table-category>
+
+            <index-product :productz_id="{{$product_id}}" :categories="{{$categories}}"></index-product>
+
         </div>
    </div>
 

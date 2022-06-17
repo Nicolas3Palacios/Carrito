@@ -2,71 +2,44 @@
 
 @section('content')
 
-<section id="product" class="product-area pt-100 pb-130 mt-25">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <div class="collection-menu text-center mt-30">
-                    <h4 class="collection-tilte">OUR PRODUCTS</h4>
-                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        @if (isset($categories))
-                            @foreach ($categories as $category)
-                            <a class="active" id="v-pills-{{$category->name}}-tab" data-toggle="pill" href="#v-pills-{{$category->name}}" role="tab" aria-controls="v-pills-{{$category->name}}" >{{$category->name}}</a>
-                            @endforeach
-                        @endif
+    <div>
+         @if (isset($categories))
+            @foreach ($categories as $category)
 
+                    <div >
+                        <h3>
+                            <h2 >{{$category->name}}</h2>
+                        </h3>
+                    </div>
 
-                    </div> <!-- nav -->
-                </div> <!-- collection menu -->
-            </div>
-            @if (isset($categories))
-            <div class="col-lg-9 col-md-8">
-                <div class="tab-content" id="v-pills-tabContent">
-                        @foreach ($categories as $category)
-                        <div class="tab-pane fade show active" id="v-pills-{{$category->name}}" role="tabpanel" aria-labelledby="v-pills-{{$category->name}}-tab">
-                            @if (isset($products))
-                                @foreach ($products as $product)
-                                     @if ($product->category_name == $category->name)
-                                        <div class="product-items mt-30">
-                                            <div class="row product-items-active">
-                                                    <div class="col-md-4">
-                                                        <div class="single-product-items">
-                                                            <div class="product-item-image">
-                                                                    <a href="#"><img src="{{ asset('storage'.'/'.$product->image_name)}}" alt="Product"></a>
-                                                            </div>
-                                                            <div class="product-item-content text-center mt-30">
-                                                                <h5 class="product-title"><a href="#">{{$product->name}}</a></h5>
-                                                                <ul class="rating">
-                                                                    <li><i class="lni-star-filled"></i></li>
-                                                                    <li><i class="lni-star-filled"></i></li>
-                                                                    <li><i class="lni-star-filled"></i></li>
-                                                                    <li><i class="lni-star-filled"></i></li>
-                                                                </ul>
-                                                                <span class="regular-price">${{$product->sale_price}}</span>
-                                                                {{-- <span class="discount-price">${{$product->price }}</span> --}}
-                                                                <add-component product-id="{{$product->id}}"
-                                                                    user-id="{{auth()->user()->id ?? 0}}"/>
-                                                            </div>
-                                                        </div> <!-- single product items -->
-                                                    </div>
-                                                </div> <!-- row -->
-                                            </div> <!-- product items -->
-                                     @endif
-                                 @endforeach
-                             @endif
-                        </div> <!-- tab pane -->
-                        @endforeach
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-3 row-cols-md-1 g-4">
+                                    @foreach ($products as $product)
+                                    @if ($category->id == $product->categories_id)
 
+                                        <div class="card col mb-3" style="width: 250px;">
+                                            <img src="{{ asset('storage'.'/'.$product->image_name) }}" class="card-img-top img-thumbnail img-fluid" alt="Foto">
+                                            <div class="card-body">
+                                            <h5 class="card-title">{{$product->name}}</h5>
+                                            <p class="card-text">{{$product->description}}</p>
+                                            <p class="card-text">${{$product->sale_price}}</p>
+                                            <add-component product-id="{{$product->id}}"
+                                                user-id="{{auth()->user()->id ?? 0}}"/>
+                                            </div>
+                                        </div>
 
-                </div> <!-- tab content -->
-            </div>
-            @endif
+                                        @endif
+                                        @endforeach
+                                </div>
 
-        </div> <!-- row -->
+                            </div>
+                        </div>
 
-    </div> <!-- container -->
-</section>
-
-
+                    </div>
+                @endforeach
+                @endif
+</div>
 
 @endsection

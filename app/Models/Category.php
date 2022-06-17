@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $primaryKey = 'name';
-    public $incrementing = false;
-    protected $keyType = 'string';
-    protected $fillable = ['name'];
     use HasFactory;
 
-    public function Products()
+    protected $fillable = ['name',
+    'id',
+    'created_at',
+    'updated_at'];
+
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
 }

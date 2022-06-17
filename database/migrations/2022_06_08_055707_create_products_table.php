@@ -20,7 +20,12 @@ return new class extends Migration
             $table->string('image_name');
             $table->string('price');
             $table->string('sale_price');
-            $table->string('category_name');
+            // $table->integer('categories_id')->unsigned();
+            // $table->foreign('categories_id')->references('categories')->on('id')->onDelete('cascade');
+
+            // $table->string('category_id');
+
+            $table->foreignId('categories_id')->constrained('categories')->onDelete('cascade');
 
             $table->timestamps();
         });

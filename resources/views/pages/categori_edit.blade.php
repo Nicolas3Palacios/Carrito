@@ -7,9 +7,11 @@
 <section class="container">
 
     <div class="card">
+
         <div class="card-body">
-            
-            <table-category :categories="{{$categories}}"> </table-category>
+
+            <index-category :categori="{{$category}}"></index-category>
+
         </div>
    </div>
 

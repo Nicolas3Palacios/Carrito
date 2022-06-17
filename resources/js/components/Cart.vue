@@ -2,7 +2,7 @@
     <div >
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle btn btn-warning btn-sm" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Car {{itemCount}}
+            Cart {{itemCount}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/checkout">Checkout</a>

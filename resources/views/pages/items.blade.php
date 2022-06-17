@@ -5,10 +5,11 @@
 @auth()
 
 <section class="container">
-    <h1>.</h1>
-    <index-product :products="{{$products}}" :categories="{{$categories}}">
-
-    </index-product>
+   <div class="card">
+        <div class="card-body">
+            <table-product :products="{{$products}}" :categories="{{$categories}}"/>
+        </div>
+   </div>
 </section>
 @endauth
 

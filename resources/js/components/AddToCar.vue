@@ -3,7 +3,7 @@
         <hr>
             <button class="btn btn-warning text-center"
                 @click.prevent="addProductToCar()">
-                Add To Car
+                Add To Cart
             </button>
     </div>
 </template>

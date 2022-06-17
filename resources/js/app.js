@@ -30,8 +30,14 @@ Vue.component('cart-component', require('./components/Cart.vue').default);
 Vue.component('checkout', require('./components/Checkout.vue').default);
 
 Vue.component('index-category', require('./components/category/IndexCategory.vue').default);
+Vue.component('table-category', require('./components/category/TableCategory.vue').default);
+Vue.component('parent-category', require('./components/category/ParentCategory.vue').default);
+
+
 
 Vue.component('index-product', require('./components/product/IndexProduct.vue').default);
+Vue.component('table-product', require('./components/product/TableProduct.vue').default);
+
 
 
 

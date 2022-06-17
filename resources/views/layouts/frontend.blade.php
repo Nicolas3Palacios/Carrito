@@ -14,11 +14,12 @@
 
 
     <!--====== Bootstrap css ======-->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="assets/css/bootstrap.min.css"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 
     <!--====== Animate css ======-->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    {{-- <link rel="stylesheet" href="assets/css/animate.css">
 
     <!--====== Magnific Popup css ======-->
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
@@ -37,7 +38,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 
     <!--====== Responsive css ======-->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/responsive.css"> --}}
 
 
 </head>
@@ -46,12 +47,12 @@
 
     <!--====== HEADER PART ENDS ======-->
 
-    <div id="app">
+   {{-- <div id="app">
         <!--====== PRELOADER PART START ======-->
 
 
 
-        <div class="preloader">
+        {{-- <div class="preloader">
             <div class="spin">
                 <div class="cube1"></div>
                 <div class="cube2"></div>
@@ -119,25 +120,75 @@
 
 
 
+    </div> --}}
+
+
+    <div id="app">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{('/')}}">
+                <img src="images/logos.png" width="200" alt="Logo">
+            </a> <!-- Logo -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{route('index')}}">Home</a>
+                </li>
+
+                    @auth()
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Config
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" data-scroll-nav="0" href="{{route('items-view')}}">Products</a>
+                                <a class="dropdown-item" data-scroll-nav="0" href="{{route('category-view')}}">Categories</a>
+                            </div>
+                        </li>
+
+                    @endauth
+                    @if (Route::has('login'))
+                        @auth
+                            <cart-component></cart-component>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                            </li>
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            </li>
+                            @endif
+                        @endauth
+                    @endif
+
+
+              </ul>
+            </div>
+          </nav>
+
+
+          @yield('content')
     </div>
 
-    <script>
-        window.onbeforeunload = function(){
-            window.scrollTo(0,0);
-        }
-    </script>
+        {{-- <script>
+            window.onbeforeunload = function(){
+                window.scrollTo(0,0);
+            }
+        </script> --}}
 
      <!--====== jquery js ======-->
-     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-     <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+     {{-- <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="assets/js/vendor/jquery-1.12.4.min.js"></script> --}}
      <script src="{{ asset('js/app.js') }}" ></script>
 
      <!--====== Bootstrap js ======-->
-     <script src="assets/js/bootstrap.min.js"></script>
+     {{-- <script src="assets/js/bootstrap.min.js"></script> --}}
 
 
      <!--====== Slick js ======-->
-     <script src="assets/js/slick.min.js"></script>
+     {{-- <script src="assets/js/slick.min.js"></script>
 
      <!--====== Magnific Popup js ======-->
      <script src="assets/js/jquery.magnific-popup.min.js"></script>
@@ -150,8 +201,11 @@
      <script src="assets/js/jquery.nice-number.min.js"></script>
 
      <!--====== Main js ======-->
-     <script src="assets/js/main.js"></script>
+     <script src="assets/js/main.js"></script> --}}
+     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 
- </body>
+    </body>
 
  </html>

@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(6);
         $categories = Category::all();
 
         return view('product', compact('products', 'categories'));
@@ -41,10 +41,15 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product = $request->all();
+        $imageName = null;
+
         if ($request->hasFile('image_name')) {
-            $product['image_name'] = $request->image_name->getClientOriginalName();
-            $request->file('image_name')->storeAs('products',$product['image_name']);
+            
+            $imageName = "images/products/{$request->image_name->getClientOriginalName()}.{$request->image_name->getClientOriginalExtension()}";
+            $request->image_name->move(public_path('images/products'),$imageName);
+
         }
+        
         Product::create($product);
 
         return response()->json([
@@ -74,9 +79,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($product)
     {
-        //
+        $product = Product::where('id',$product)->first();
+        $categories = Category::all();
+        return view('pages.product_edit',['product_id' => $product,'categories' => $categories]);
     }
 
     /**
@@ -86,9 +93,23 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Product $product)
     {
-        //
+
+        if ($request->hasFile('image_name')) {
+
+            $product['image_name'] = $request->file('image_name')->store('uploads','public');
+
+        }
+
+        $product->update($request->all());
+
+
+        $products=Product::all();
+        return response()->json([
+            'updated' => true,
+            'products' => $products
+        ]);
     }
 
     /**
@@ -97,9 +118,13 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($product)
     {
-        //
+        $product = Product::find($product);
+        $product->delete();
+        return response()->json([
+            'deleted' => true,
+        ]);
     }
 
     /**

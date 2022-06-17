@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,6 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-
         return view('pages.category', compact('categories'));
     }
 
@@ -52,9 +53,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($category)
     {
-        //
+        $category = Category::where('name',$category)->first();
+        return view('pages.categori_edit',['category' => $category]);
     }
 
     /**
@@ -65,7 +67,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -75,19 +77,24 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Category $category)
     {
-        //
+        $category->update($request->all());
+        $categories=Category::all();
+        return response()->json([
+            'updated' => true,
+            'categories' => $categories
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function delete($category)
     {
-        //
+        $category = Category::find($category);
+        // dd($category);
+        $category->delete();
+        return response()->json([
+            'deleted' => true,
+        ]);
     }
 }
