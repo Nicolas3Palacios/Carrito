@@ -40,18 +40,18 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-    
-        $product = $request->all();
+
+        $product = new Product($request->all());
         $imageName = null;
 
-        if ($request->hasFile('image_name')) {
-            
-            $imageName = "images/products/{$request->image_name->getClientOriginalName()}.{$request->image_name->getClientOriginalExtension()}";
-            $request->image_name->move(public_path('images/products'),$imageName);
-          
+        if ($request->hasFile('image')) {
+
+            $imageName = "/images/products/{$request->image->getClientOriginalName()}";
+            $request->image->move(public_path('/images/products'),$imageName);
+            $product->image_name = $imageName;
         }
-        
-        Product::create($product);
+
+        $product->save();
 
         return response()->json([
             'saved' => true,
@@ -98,19 +98,20 @@ class ProductsController extends Controller
     public function update(Request $request,Product $product)
     {
 
-        if ($request->hasFile('image_name')) {
+        $imageName = null;
 
-            $product['image_name'] = $request->file('image_name')->store('uploads','public');
+        if ($request->hasFile('image')) {
 
+            $imageName = "/images/products/{$request->image->getClientOriginalName()}";
+            $request->image->move(public_path('/images/products'),$imageName);
+            $product->image_name = $imageName;
         }
 
         $product->update($request->all());
 
-
-        $products=Product::all();
         return response()->json([
             'updated' => true,
-            'products' => $products
+            'product' => $product
         ]);
     }
 

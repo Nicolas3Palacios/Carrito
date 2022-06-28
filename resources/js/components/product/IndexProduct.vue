@@ -45,23 +45,23 @@
 
 export default {
     name:'Form',
-    props:['categories','productz'],
+    props:['categories','produc'],
     data(){
         return{
             product:{
-                name: null,
-                description: null,
-                image_name: null,
-                price: null,
-                sale_price: null,
-                categories_id: null
+                name: '',
+                description: '',
+                image_name: '',
+                price: '',
+                sale_price: '',
+                categories_id: ''
             }
         }
 
     },
-    // mounted(){
-    //     this.productz ? this.product = this.product:''
-    // },
+    mounted(){
+        this.produc ? this.product = this.produc:''
+    },
     methods:{
 
         select_file(event){
@@ -73,22 +73,28 @@ export default {
 
             // pass image_name
             let product = new FormData();
-            for (let key in product) {
-                product.append(key, this.product[key])
+
+            // for (let key in product) {
+            //     product.append(key, this.product[key]);
+            // }
+            product.append('name', this.product.name)
+            product.append('description', this.product.description)
+            product.append('price', this.product.price)
+            product.append('sale_price', this.product.sale_price)
+            product.append('categories_id', this.product.categories_id)
+
+            if(this.avatar){
+                product.append('image', this.avatar, this.avatar.name);
             }
 
+
             let url='/items/store'
-            if(!this.productz){
+            if(this.produc){
                 url=`/items/update/${this.product.id}`
             }
 
 
-            // if(!this.person.create){
-            //     url=`/home/update/${this.person.id}`
-            // }
-            // await axios.post(url, this.products).then(res => {
-
-            axios.post(url, this.product).then(res => {
+             axios.post(url, product).then(res => {
                 if(res.data.saved){
                     this.product = {
                         name: null,

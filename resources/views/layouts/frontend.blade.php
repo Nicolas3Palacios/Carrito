@@ -142,8 +142,8 @@
                             Config
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" data-scroll-nav="0" href="{{route('items-view')}}">Products</a>
-                                <a class="dropdown-item" data-scroll-nav="0" href="{{route('category-view')}}">Categories</a>
+                                <a class="dropdown-item" data-scroll-nav="0" href="{{route('items.view')}}">Products</a>
+                                <a class="dropdown-item" data-scroll-nav="0" href="{{route('category.view')}}">Categories</a>
                             </div>
                         </li>
 

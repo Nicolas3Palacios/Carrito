@@ -42,7 +42,7 @@ export default {
     methods:{
 
          deleteCategory(category){
-                 axios.post(`/delete/${category.id}`).then(res =>{
+                 axios.post(`/category/delete/${category.id}`).then(res =>{
                     if(res.data.deleted){
                         alert('Category deleted')
                         window.location.href="/category"

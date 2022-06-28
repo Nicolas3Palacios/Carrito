@@ -5,7 +5,6 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
-use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,29 +21,38 @@ use App\Models\Category;
 Route::get('/',[ProductsController::class,'index'])->name('index');
 Route::get('/cerrar',[ProductsController::class,'cerrar']);
 
-
-
-
 Auth::routes();
 
-Route::post('/cart', [CarsController::class, 'store'])->name('cart');
-Route::get('/checkout', [CarsController::class, 'index'])->name('checkout');
-Route::get('/checkout/get/items', [CarsController::class, 'getCarItemsForCheckout']);
-Route::post('/process/user/payment', [CarsController::class, 'processPayment']);
+Route::group(['controller'=>CarsController::class],function(){
+    Route::post('/cart',  'store')->name('cart');
+    Route::get('/checkout',  'index')->name('checkout');
+    Route::get('/checkout/get/items',  'getCarItemsForCheckout');
+    Route::post('/process/user/payment',  'processPayment');
+});
 
 
-Route::get('/items',[ProductsController::class,'show'])->name('items-view');
-Route::post('/items/store',[ProductsController::class,'store']);
-Route::delete('/delete/{product}',[ProductsController ::class,'delete']);
-Route::get('/item/edit/{product}',[ProductsController::class,'edit']);
-Route::post('/items/update/{product}',[ProductsController::class,'update']);
+Route::group(['prefix'=>'/items','controller'=>ProductsController::class],function(){
+    Route::name('items.')->group(function(){
+        Route::get('/','show')->name('view');
+        Route::post('/store','store')->name('store');
+        Route::delete('/delete/{product}','delete')->name('delete');
+        Route::get('/edit/{product}','edit')->name('edit');
+        Route::post('/update/{product}','update')->name('update');
+
+    });
+});
 
 
-Route::get('/category',[CategoryController::class,'index'])->name('category-view');
-Route::post('/category/store',[CategoryController::class,'store']);
-Route::get('/category/edit/{category}',[CategoryController::class,'show']);
-Route::post('/delete/{category}',[CategoryController::class,'delete']);
-Route::post('/category/update/{category}',[CategoryController::class,'update']);
+Route::group(['prefix'=>'/category','controller'=>CategoryController::class],function(){
+    Route::name('category.')->group(function(){
+        Route::get('/','index')->name('view');
+        Route::post('/store','store')->name('store');
+        Route::get('/edit/{category}','show')->name('show');
+        Route::post('/delete/{category}','delete')->name('delete');
+        Route::post('/update/{category}','update')->name('update');
+    });
+
+});
 
 
 

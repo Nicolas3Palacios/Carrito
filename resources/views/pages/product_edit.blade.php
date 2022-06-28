@@ -10,7 +10,7 @@
 
         <div class="card-body">
 
-            <index-product :productz_id="{{$product_id}}" :categories="{{$categories}}"></index-product>
+            <index-product :produc="{{$product_id}}" :categories="{{$categories}}"></index-product>
 
         </div>
    </div>

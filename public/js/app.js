@@ -5865,7 +5865,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteCategory: function deleteCategory(category) {
-      axios.post("/delete/".concat(category.id)).then(function (res) {
+      axios.post("/category/delete/".concat(category.id)).then(function (res) {
         if (res.data.deleted) {
           alert('Category deleted');
           window.location.href = "/category";
@@ -5933,22 +5933,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Form',
-  props: ['categories', 'productz'],
+  props: ['categories', 'produc'],
   data: function data() {
     return {
       product: {
-        name: null,
-        description: null,
-        image_name: null,
-        price: null,
-        sale_price: null,
-        categories_id: null
+        name: '',
+        description: '',
+        image_name: '',
+        price: '',
+        sale_price: '',
+        categories_id: ''
       }
     };
   },
-  // mounted(){
-  //     this.productz ? this.product = this.product:''
-  // },
+  mounted: function mounted() {
+    this.produc ? this.product = this.produc : '';
+  },
   methods: {
     select_file: function select_file(event) {
       this.avatar = event.target.files[0];
@@ -5958,23 +5958,27 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // pass image_name
-      var product = new FormData();
+      var product = new FormData(); // for (let key in product) {
+      //     product.append(key, this.product[key]);
+      // }
 
-      for (var key in product) {
-        product.append(key, this.product[key]);
+      product.append('name', this.product.name);
+      product.append('description', this.product.description);
+      product.append('price', this.product.price);
+      product.append('sale_price', this.product.sale_price);
+      product.append('categories_id', this.product.categories_id);
+
+      if (this.avatar) {
+        product.append('image', this.avatar, this.avatar.name);
       }
 
       var url = '/items/store';
 
-      if (!this.productz) {
+      if (this.produc) {
         url = "/items/update/".concat(this.product.id);
-      } // if(!this.person.create){
-      //     url=`/home/update/${this.person.id}`
-      // }
-      // await axios.post(url, this.products).then(res => {
+      }
 
-
-      axios.post(url, this.product).then(function (res) {
+      axios.post(url, product).then(function (res) {
         if (res.data.saved) {
           _this.product = {
             name: null,
@@ -6068,7 +6072,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios["delete"]("/delete/".concat(product.id)).then(function (res) {
+                return axios["delete"]("/items/delete/".concat(product.id)).then(function (res) {
                   if (res.data.deleted) {
                     alert('Product deleted');
                     window.location.href = "/items";
@@ -29918,11 +29922,7 @@ var render = function () {
   return _c("section", [
     _c(
       "div",
-      [
-        _c("index-product", {
-          attrs: { productz: _vm.products, categories: _vm.categories },
-        }),
-      ],
+      [_c("index-product", { attrs: { categories: _vm.categories } })],
       1
     ),
     _vm._v(" "),
@@ -29953,7 +29953,7 @@ var render = function () {
                     "a",
                     {
                       staticClass: "btn btn-secondary btn-m",
-                      attrs: { href: "/item/edit/" + product.id },
+                      attrs: { href: "/items/edit/" + product.id },
                     },
                     [_vm._v("Edit")]
                   ),

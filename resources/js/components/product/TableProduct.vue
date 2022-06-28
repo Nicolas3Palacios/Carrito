@@ -1,7 +1,7 @@
 <template>
     <section>
         <div>
-            <index-product :productz="products" :categories="categories"/>
+            <index-product :categories="categories"/>
         </div>
         <div>
             <table class="table mt-4">
@@ -21,7 +21,7 @@
                         <td>{{product.price}}</td>
                         <td>{{product.sale_price}}</td>
                         <td class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <a :href="`/item/edit/${product.id}`" class="btn btn-secondary btn-m">Edit</a>
+                            <a :href="`/items/edit/${product.id}`" class="btn btn-secondary btn-m">Edit</a>
 
                             <a href="#"  class="btn btn-danger btn-m" @click="deleteProduct(product, index)">Delete</a>
                         </td>
@@ -46,7 +46,7 @@ export default {
     methods:{
 
         async deleteProduct(product, index){
-                await axios.delete(`/delete/${product.id}`).then(res =>{
+                await axios.delete(`/items/delete/${product.id}`).then(res =>{
                     if(res.data.deleted){
                         alert('Product deleted')
                         window.location.href="/items"
